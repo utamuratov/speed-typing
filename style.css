@@ -60,6 +60,14 @@
     padding: 10px 0;
 }
 
+#errorsCount {
+    color: red;
+}
+
+#rightsCount {
+    color: green;
+}
+
 @keyframes underline {
     0% {
         text-decoration: none;
