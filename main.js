@@ -1,5 +1,3 @@
-let CURRENT_TEXT;
-
 const TEXTS = [
   "Most of us wonder if there is a God and if He really is the God of the Bible. In the Bible God says I will make your name great and today the name of Abraham/Abram is known worldwide. This promise has come true. The earliest copy of Genesis found in the Dead Sea Scrolls is dated 200-100 B.C. which means the promise has been in writing since at least that time. At that time the name of Abraham was not well-known so the promise came true only after it was written down, not before.",
   "The Jews who descended from Abraham were never really the nation we associate with greatness.  They did not conquer and build a great empire like the Romans did or build large monuments like the Egyptians did with the pyramids. Their fame comes from the Law and Book which they wrote; from some remarkable individuals that were Jewish; and that they have survived as a somewhat different people group for thousands of years.  Their greatness is not because of anything they did, but rather what was done to and through them. ",
@@ -7,8 +5,10 @@ const TEXTS = [
   "The Khao San Road was a famous traveller spot even before Leonardo di Caprio's character in the film The Beach stayed there. But it's noisy, not very pretty and not very Thai. For something more authentic, Phra Kanong offers an alternative place to stay, with its fantastic street markets where everyday Bangkok people eat, work and live. It's not as convenient for the main tourist sites, but it has a Skytrain station so you can be at the Grand Palace in 20 minutes.",
   "Bangkok's traffic can be a nightmare. Sure, you can easily take a taxi – if you want to spend hours stuck in traffic jams – but there are two much better ways to get around the city. To explore the temples and historical sites, catch an express boat river taxi or a longtail boat along the Chao Phraya river and the canals. For the modern part of the city, the Skytrain is a fast, cheap way to travel from the river to the shopping malls and nightlife of Sukhumvit, and the famous Chatuchak street market.",
 ];
-let CURRENT_POSITION = 0;
 const TIMER = 30;
+
+let CURRENT_TEXT;
+let CURRENT_POSITION = 0;
 let MISTAKES = [];
 let errors = 0;
 let rights = 0;
@@ -18,16 +18,20 @@ let isFinished = false;
 init();
 
 function init() {
+  initData();
+  setText(CURRENT_TEXT);
+  setPosition(CURRENT_POSITION);
+  setErrorsCount(errors);
+  setRightsCount(rights);
+}
+
+function initData() {
   CURRENT_TEXT = TEXTS[Math.floor(Math.random() * TEXTS.length)];
   errors = 0;
   rights = 0;
   leftSeconds = TIMER;
   MISTAKES = [];
   document.getElementById("timer").innerHTML = leftSeconds;
-  setText(CURRENT_TEXT);
-  setPosition(CURRENT_POSITION);
-  setErrorsCount(errors);
-  setRightsCount(rights);
 }
 
 function setText(text) {
@@ -47,13 +51,6 @@ function startTimer() {
   }, 1000);
 }
 
-function showTheEnd() {
-  alert(`O'yin tugadi!
-        To'g'ri: ${rights}
-        Noto'g'ri: ${errors}
-        `);
-}
-
 function setPosition(index) {
   const playground = document.getElementById("playground");
   const text = playground.innerText;
@@ -63,7 +60,14 @@ function setPosition(index) {
     text.slice(index + 1);
 }
 
-function setMistakes(mistakes) {
+function showTheEnd() {
+  alert(`O'yin tugadi!
+        To'g'ri: ${rights}
+        Noto'g'ri: ${errors}
+        `);
+}
+
+function resetMistakesAndPosition(mistakes) {
   let innerHtml = "";
   let lastMistakenIndex = -1;
   const playground = document.getElementById("playground");
@@ -126,11 +130,6 @@ function listenInpt(e) {
    * 8 - Backspace
    */
   const keyCode = e.keyCode;
-  //   if (
-  //     (keyCode >= 48 && keyCode <= 90) ||
-  //     keyCode === 32 ||
-  //     (keyCode === 8 && CURRENT_POSITION > 0)
-  //   ) {
   if (keyCode === 8) {
     CURRENT_POSITION--;
     if (MISTAKES[MISTAKES.length - 1] === CURRENT_POSITION) {
@@ -142,24 +141,20 @@ function listenInpt(e) {
   } else {
     if (CURRENT_POSITION < CURRENT_TEXT.length) {
       if (e.key === CURRENT_TEXT[CURRENT_POSITION]) {
-        // TODO: COUNT RIGHT KEYS
         rights++;
         leftSeconds++;
       } else {
-        // TODO: COUNT MISTAKES
         errors++;
         MISTAKES.push(CURRENT_POSITION);
       }
       CURRENT_POSITION++;
     }
   }
-  setMistakes(MISTAKES);
+  resetMistakesAndPosition(MISTAKES);
 
   if (CURRENT_POSITION === CURRENT_TEXT.length) {
     showTheEnd();
     isFinished = true;
-
     return;
   }
-  //   }
 }
