@@ -4,19 +4,19 @@ body {
 
 .box {
     width: 700px;
-    height: 300px;
+    /* height: 300px; */
     margin: auto;
     background-color: white;
     border-radius: 10px;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-    padding: 20px;
+    padding: 30px;
     margin-top: 50vh;
     transform: translateY(-50%);
 }
 
 .box__card {
     box-sizing: border-box;
-    padding: 10px;
+    padding: 15px;
     border-radius: 10px;
     border: 1px solid #c4c4c4;
     height: 100%;
@@ -27,9 +27,11 @@ body {
 .box__card__body {
     flex-grow: 1;
     font-weight: 500;
-    font-size: 18px;
+    font-size: 20px;
     line-height: 125%;
-    letter-spacing: 1px;
+    letter-spacing: 2px;
+    word-spacing: 4px;
+    padding-bottom: 10px;
 }
 
 .box__card__footer {
@@ -37,7 +39,7 @@ body {
 }
 
 .current {
-    color: #1a01fa;
+    color: rgb(53, 161, 165);
     animation: underline 1s infinite;
 }
 
@@ -57,11 +59,24 @@ body {
 
 .list li {
     list-style-type: none;
+    border-right: 1px solid #c4c4c4;
+    padding-right: 20px;
 }
 
 .box__card__footer {
     display: flex;
-    padding: 10px 0;
+    align-items: center;
+    padding-top: 10px;
+    font-size: 18px;
+}
+
+.box__card__footer button {
+    font-size: 16px;
+    background-color: white;
+    border: 1px solid #c4c4c4;
+    height: 40px;
+    border-radius: 5px;
+    padding: 0 15px;
 }
 
 #errorsCount {
