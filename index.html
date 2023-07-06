@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Typing speed test</title>
+  </head>
+  <link rel="stylesheet" href="./style.css" />
+  <body>
+    <div class="box">
+      <div class="box__card">
+        <div class="box__card__body" id="playground">
+          <!-- <span class="current">H</span>ello <span class="mistake">w</span>orld -->
+        </div>
+        <div class="box__card__footer">
+          <ul class="list">
+            <li>Vaqt: <span id="timer"></span></li>
+            <li>Xatolik: <span id="errorsCount"></span></li>
+            <li>To'g'ri: <span id="rightsCount"></span></li>
+          </ul>
+          <button onclick="init()">Yangilash</button>
+        </div>
+      </div>
+    </div>
+    <script src="./main.js"></script>
+  </body>
+</html>
